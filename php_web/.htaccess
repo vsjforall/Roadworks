@@ -1,0 +1,19 @@
+# Keep the record store out of reach. Without this anyone can read
+# data/feed.json directly, and once you add a paid tier that is the
+# whole product sitting in the open.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^data/ - [F,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # The shell may cache; the feed never does.
+  <FilesMatch "\.(html|js|json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.png$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+DirectoryIndex index.html

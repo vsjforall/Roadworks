@@ -1,0 +1,14 @@
+{
+  "name": "Kerala Roadworks",
+  "short_name": "Roadworks",
+  "description": "Live tender awards for roads and bridges across Kerala",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbfaf8",
+  "theme_color": "#0f6e56",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

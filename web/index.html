@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F6E56">
+<title>Kerala Roadworks</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/static/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{
+  --bg:#fbfaf8; --card:#ffffff; --line:#e6e3dd;
+  --ink:#1a1917; --ink2:#6b6862; --ink3:#9a968e;
+  --teal:#0f6e56; --tealbg:#e1f5ee;
+  --amber:#854f0b; --amberbg:#faeeda;
+  --blue:#0c447c; --bluebg:#e6f1fb;
+  --red:#993c1d;
+  --ease:cubic-bezier(.2,0,0,1);
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#121211;--card:#1c1b1a;--line:#2e2d2b;
+        --ink:#f0efec;--ink2:#a8a49c;--ink3:#76736c;
+        --tealbg:#085041;--teal:#9fe1cb;
+        --amberbg:#633806;--amber:#fac775;
+        --bluebg:#0c447c;--blue:#b5d4f4;--red:#f0997b;}
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  overscroll-behavior-y:contain;}
+body{padding-bottom:calc(24px + var(--safe-b))}
+
+header{position:sticky;top:0;z-index:10;background:var(--bg);
+  padding:calc(12px + var(--safe-t)) 16px 0;border-bottom:.5px solid var(--line)}
+.hrow{display:flex;align-items:center;justify-content:space-between}
+h1{font-size:19px;font-weight:600;margin:0;letter-spacing:-.01em}
+.live{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--teal);
+  animation:pulse 2s var(--ease) infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.sub{font-size:13px;color:var(--ink3);margin:2px 0 10px}
+
+.chips{display:flex;gap:7px;overflow-x:auto;padding:0 0 11px;
+  scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font-size:13px;padding:7px 14px;border-radius:999px;
+  border:.5px solid var(--line);background:transparent;color:var(--ink);
+  font-family:inherit;cursor:pointer;
+  transition:background .18s var(--ease),transform .12s var(--ease)}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed="true"]{background:var(--bluebg);color:var(--blue);
+  border-color:transparent;font-weight:600}
+
+main{padding:10px 12px 0;max-width:560px;margin:0 auto}
+
+.card{background:var(--card);border:.5px solid var(--line);border-radius:14px;
+  padding:13px 14px;margin-bottom:9px;
+  animation:rise .32s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translate3d(0,10px,0)}
+  to{opacity:1;transform:none}}
+.card:active{transform:scale(.988);transition:transform .1s var(--ease)}
+.top{display:flex;gap:6px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px}
+.p-road{background:var(--bluebg);color:var(--blue)}
+.p-awarded{background:var(--tealbg);color:var(--teal)}
+.p-opened{background:var(--amberbg);color:var(--amber)}
+.dist{margin-left:auto;font-size:11px;color:var(--ink3)}
+.title{font-size:14px;line-height:1.42;color:var(--ink);margin-bottom:10px}
+.money{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:4px}
+.val{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.var{font-size:12px;font-weight:500}
+.var.dn{color:var(--teal)} .var.up{color:var(--red)}
+.win{font-size:13px;color:var(--ink2);margin-bottom:10px}
+.foot{display:flex;align-items:center;gap:6px;padding-top:9px;
+  border-top:.5px solid var(--line);font-size:11px;color:var(--ink3)}
+.auth{margin-left:auto;text-align:right}
+
+.sk{background:var(--card);border:.5px solid var(--line);border-radius:14px;
+  padding:13px 14px;margin-bottom:9px}
+.bar{height:11px;border-radius:6px;background:var(--line);
+  animation:shim 1.4s var(--ease) infinite}
+@keyframes shim{0%,100%{opacity:.55}50%{opacity:.9}}
+
+.empty{text-align:center;padding:56px 24px;color:var(--ink2)}
+.empty b{display:block;font-size:16px;color:var(--ink);margin-bottom:6px;
+  font-weight:600}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;
+  transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>Awards</h1>
+    <span class="live"><span class="dot"></span><span id="srcs">Connecting</span></span>
+  </div>
+  <div class="sub" id="sub">Loading the feed</div>
+  <div class="chips" id="chips"></div>
+</header>
+<main id="feed"></main>
+<script src="/static/app.js"></script>
+</body>
+</html>
